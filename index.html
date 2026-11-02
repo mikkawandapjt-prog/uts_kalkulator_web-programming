@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>UTS - Operasi Matematika</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: Arial, sans-serif;
+            }
+
+            body {
+                display: flex;
+                flex-direction: column;
+                min-height: 100vh;
+                background-color: #f9f9f9;
+            }
+
+            header {
+                background-color: #00bcd4;
+                color: white;
+                padding: 15px 20px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            header .logo {
+                font-weight: bold;
+                font-size: 1.1rem;
+            }
+
+            header nav a {
+                color: white;
+                text-decoration: none;
+                margin-left: 15px;
+                font-size: 0.9rem;
+            }
+
+            header nav a:hover {
+                text-decoration: underline;
+            }
+
+            main {
+                flex: 1;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 20px;
+            }
+
+            .calculator-container {
+                background: white;
+                padding: 30px;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0,0,0,0,1);
+                width: 100%;
+                max-width: 400px;
+            }
+
+            .calculator-container h2 {
+                margin-bottom: 20px;
+                font-size: 1.3rem;
+                color: #333;
+                text-align: center;
+            }
+
+            .form-group {
+                margin-bottom: 15px;
+            }
+
+            .form-group label {
+                display: block;
+                margin-bottom: 5px;
+                font-size: 0.85rem;
+                color: #555;
+            }
+
+            .form-group input, .form-group select {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                font-size: 0.95rem;
+            }
+
+            button.btn-hitung {
+                background-color: #007bff;
+                color: white;
+                border: none;
+                padding: 10px 15px;
+                width: 100%;
+                border-radius: 4px;
+                font-size: 1rem;
+                cursor: pointer;
+                margin-top: 10px;
+            }
+
+            button.btn-hitung:hover {
+                background-color: #0056b3;
+            }
+
+            .hasil-box {
+                margin-top: 20px;
+                padding: 10px;
+                background-color: #e9ecef;
+                border-radius: 4px;
+                text-align: center;
+                font-weight: bold;
+                color: #333;
+            }
+
+            footer {
+                background-color: #333;
+                color: white;
+                text-align: center;
+                padding: 15px;
+                font-size: 0.85rem;
+            }
+        </style>
+    </head>
+    <body>
+
+        <header>
+            <div class="logo">My App UTS</div>
+            <nav>
+                <a href="#">Home</a>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+            </nav>
+        </header>
+
+        <main>
+            <div class="calculator-container">
+                <h2>Operasi Matematika dengan JavaScript</h2>
+
+                <div class="form-group">
+                    <label for="angka1">Angka Pertama</label>
+                    <input type="number" id="angka1" placeholder="Masukkan angka pertama">
+                </div>
+
+                <div class="form-group">
+                    <label for="angka2">Angka Kedua</label>
+                    <input type="number" id="angka2" placeholder="Masukkan angka kedua">
+                </div>
+
+                <div class="form-group">
+                    <label for="Operasi">Operasi</label>
+                    <select id="operasi">
+                        <option value="tambah">Penjumlahan</option>
+                        <option value="kurang">Pengurangan</option>
+                        <option value="kali">Perkalian</option>
+                        <option value="bagi">Pembagian</option>
+                    </select>
+                </div>
+
+                <button class="btn-hitung" onclick="hitungMatematika()">Hitung</button>
+
+                <div class="hasil-box" id="hasilOutput">
+                    Hasil: -
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 My App UTS</p>
+        </footer>
+
+        <script>
+            function hitungMatematika() {
+                const angka1Input = document.getElementById('angka1').value;
+                const angka2Input = document.getElementById('angka2').value;
+                const operasi = document.getElementById('operasi').value;
+                const output = document.getElementById('hasilOutput');
+
+                if (angka1Input === "" || angka2Input === "") {
+                    output.innerHTML = "Harap masukkan kedua angka";
+                    return;
+                }
+
+                const angka1 = parseFloat(angka1Input);
+                const angka2 = parseFloat(angka2Input);
+                let hasil = 0;
+
+                switch (operasi) {
+                    case 'tambah':
+                        hasil = angka1 + angka2;
+                        break;
+                    case 'kurang':
+                        hasil = angka1 - angka2;
+                        break;
+                    case 'kali':
+                        hasil = angka1 * angka2;
+                        break;
+                    case 'bagi':
+                        if (angka2 === 0) {
+                            output.innerHTML = "Error: Tidak bisa membagi dengan 0!";
+                            return;
+                        }
+                        hasil = angka1 / angka2;
+                        break;
+                    default:
+                        hasil = 0;
+                }
+
+                output.innerHTML = 'Hasil: ' + hasil;
+            }
+        </script>
+    </body>
+</html>
